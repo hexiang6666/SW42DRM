@@ -37,4 +37,13 @@ z_rotation=0;
 
 model_name=NPP;
 
+original_No_time_step=10321;
+
+total_time=20;
+
+sample_time_step_interval=15;
+
+Initial_search_Radius=8;
+
+scale_ratio=1.2;
 

@@ -5,11 +5,14 @@ import time
 import math
 import pickle
 from station_generator import *
+import os
+
 
 # #################################################### Usr input variables #######################################
 
 # #############################define base point information ###########################################
 # base_point_index=23;
+geometry_file_name=raw_input('Specify the name of geometry file: ');
 base_point_x=input('Specify the x coordinate of the base point in ESSI model: ');
 base_point_y=input('Specify the y coordinate of the base point in ESSI model: ');
 base_point_z=input('Specify the z coordinate of the base point in ESSI model: ');
@@ -40,7 +43,8 @@ z_rotation=input('Specify the degree of rotation along z axis: '); #the degree o
 #####################################################################################################################################
 
 # #################################################### Ending input ##############################################
-
+bash_preprocess_command='DRM_preprocess '+geometry_file_name;
+os.system(bash_preprocess_command);
 boundary_node=sp.loadtxt("boundary_node.txt")
 exterior_node=sp.loadtxt("exterior_node.txt")
 # station=sp.loadtxt("station.txt")

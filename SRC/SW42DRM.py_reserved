@@ -1,5 +1,3 @@
-#! /usr/bin/env python
-SOURCE_DIR='/home/hexiang/git/SW42DRM/SRC'
 import h5py
 import scipy as sp
 import time

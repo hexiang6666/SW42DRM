@@ -1,4 +1,4 @@
-file_path='/home/hexiang/git/SW42DRM';
+file_path='/home/hexiang/Research_static/NPP2_3d_motion';
 
 %###################################usr input variable #############################################
 
@@ -10,6 +10,8 @@ x_negative =input('Please input the negative x coordinate of boundary DRM layer:
 y_positive =input('Please input the positive y coordinate of boundary DRM layer: ');
 y_negative =input('Please input the negative y coordinate of boundary DRM layer: ');
 z_negative=input('Please input the negative z coordinate of boundary DRM layer: ');
+
+units_factor=input('Please input the unit factor from current length unit to meter: ');
 
 %####################################################################################################
 
@@ -35,9 +37,9 @@ for i=1:No_element
 		for j=1:No_element_columns-3
 			No_DRM_node=No_DRM_node+1;
 			DRM_node(No_DRM_node,1)=node(element(i,j+2),1);
-            DRM_node(No_DRM_node,2)=node(element(i,j+2),2);
-            DRM_node(No_DRM_node,3)=node(element(i,j+2),3);
-            DRM_node(No_DRM_node,4)=node(element(i,j+2),4);
+            DRM_node(No_DRM_node,2)=node(element(i,j+2),2)*units_factor;
+            DRM_node(No_DRM_node,3)=node(element(i,j+2),3)*units_factor;
+            DRM_node(No_DRM_node,4)=node(element(i,j+2),4)*units_factor;
             DRM_node(No_DRM_node,5)=node(element(i,j+2),5);
 
 			if((node(element(i,j+2),2)<=x_positive)&(node(element(i,j+2),2)>=x_negative)&(node(element(i,j+2),3)<=y_positive)&(node(element(i,j+2),3)>=y_negative)&(node(element(i,j+2),4)>=z_negative))
@@ -78,6 +80,8 @@ No_DRM_NODE=0;
     end
     Boundary_node=sortrows(Boundary_node);
     Exterior_node=sortrows(Exterior_node);
+
+
 
     % write_input_information;
   
