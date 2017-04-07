@@ -16,10 +16,17 @@
 BUILD_DIR = $(realpath $(CURDIR))/../build
 SOURCE_DIR= $(realpath $(CURDIR))
 
+all: DRM_pre station_generation location_transformation
 DRM_pre:
 	@cp DRM_preprocess_reserved DRM_preprocess
 	@echo export INSTALL_DIR=$(PWD) | cat - DRM_preprocess > temp && mv temp DRM_preprocess
 	@echo "#!/bin/bash" | cat - DRM_preprocess > temp && mv temp DRM_preprocess
 	@sudo ln -sf $(SOURCE_DIR)/DRM_preprocess /usr/local/bin
 	@cd /usr/local/bin ; sudo chmod +x DRM_preprocess
+station_generation:
+	@sudo chmod +x $(SOURCE_DIR)/station_generator.py 
+	@sudo ln -sf $(SOURCE_DIR)/station_generator.py /usr/local/bin
 
+location_transformation:
+	@sudo chmod +x $(SOURCE_DIR)/ESSI_location.py
+	@sudo ln -sf $(SOURCE_DIR)/ESSI_location.py /usr/local/bin
