@@ -1,0 +1,34 @@
+#!/bin/bash
+export INSTALL_DIR=/home/hexiang/git/SW42DRM/SRC
+#*******************************************************************************************************#
+# File:              ShellScript.tmpl                                              
+# Author:            hexiang6666                                     | Boris Jeremic,                       #
+# Date:              2017-04-05 19:46:58                         | University of California, Davis,95616#
+# Description:       #############                               | California                           #
+# Rev:               Version 1                                   | jeremic@ucdavis.edu                  #
+# Email:             hexwang@ucdavis.edu                         | Computational Geomechanics Group     #
+# * * * * * * * * * * * *  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  # 
+#                           Last Modified time: 2017-04-05 23:37:14                                     #              
+#  * * * * * * * * * * * *  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * #         
+# The copyright to the computer program(s) herein is the property of Hexiang Wang and Boris Jeremic     #
+# The program(s) may be used and/or copied only with written permission of Hexiang Wang or in accordance# 
+# with the terms and conditions stipulated in the agreement/contract under which the program have been  #
+# supplied.                                                                                             #
+#*******************************************************************************************************#
+#!/bin/bash
+
+FILE_DIR=$PWD
+
+sed -n '/[ ]*add[ ]*node/p' $1  >node.include
+sed 's/[a-zA-Z#(),;*]/ /g' node.include >node.4
+mv node.4 node.include
+
+rm -f element.include
+sed -n '/[ ]*add[ ]*element[ #A_Za-z0-9]*NodeBrick/p'  $1  >element.include
+sed 's/[a-zA-Z#(),;_=*]/ /g' element.include >element.4
+mv element.4 element.include
+
+cd $INSTALL_DIR; cp drminput.m_reserved drminput.m ; echo 'file_path='"'""$FILE_DIR""';" | cat - drminput.m > temp && mv temp drminput.m
+cd $INSTALL_DIR;  rm -rf *.txt; echo "Launching matlab...Calculating..." ; matlab -r -nodisplay -nojvm drminput; mv ./boundary_node.txt $FILE_DIR; mv ./DRM_element.txt $FILE_DIR; mv ./exterior_node.txt $FILE_DIR;
+cd $FILE_DIR; rm -rf *.include
+

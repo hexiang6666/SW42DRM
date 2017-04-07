@@ -1,0 +1,98 @@
+file_path='/home/hexiang/git/SW42DRM';
+
+%###################################usr input variable #############################################
+
+DRM_material_ID = input('Please input the material ID of DRM layer: ');
+
+%DRM layer is a five surfaces box is assumed here
+x_positive =input('Please input the positive x coordinate of boundary DRM layer: ');
+x_negative =input('Please input the negative x coordinate of boundary DRM layer: ');
+y_positive =input('Please input the positive y coordinate of boundary DRM layer: ');
+y_negative =input('Please input the negative y coordinate of boundary DRM layer: ');
+z_negative=input('Please input the negative z coordinate of boundary DRM layer: ');
+
+%####################################################################################################
+
+addpath(file_path);
+
+load element.include;
+% element.include: element index, elementtype, node numbers, material type
+load node.include;
+% node.include 5 columns: node index, 3 coordinates, number of freedoms
+
+No_element=size(element,1);
+No_DRM_element=0;
+No_DRM_node=0;
+
+No_element_columns=size(element,2);
+
+
+for i=1:No_element
+	if(element(i,No_element_columns)==DRM_material_ID)  
+	 % 1 is the material tyoe of DRM layer 
+		No_DRM_element=No_DRM_element+1;
+		DRM_element(No_DRM_element,1:No_element_columns)=element(i,1:No_element_columns);
+		for j=1:No_element_columns-3
+			No_DRM_node=No_DRM_node+1;
+			DRM_node(No_DRM_node,1)=node(element(i,j+2),1);
+            DRM_node(No_DRM_node,2)=node(element(i,j+2),2);
+            DRM_node(No_DRM_node,3)=node(element(i,j+2),3);
+            DRM_node(No_DRM_node,4)=node(element(i,j+2),4);
+            DRM_node(No_DRM_node,5)=node(element(i,j+2),5);
+
+			if((node(element(i,j+2),2)<=x_positive)&(node(element(i,j+2),2)>=x_negative)&(node(element(i,j+2),3)<=y_positive)&(node(element(i,j+2),3)>=y_negative)&(node(element(i,j+2),4)>=z_negative))
+				DRM_node(No_DRM_node,6)=1.0;
+			else
+				DRM_node(No_DRM_node,6)=0.0;
+			end
+		end
+	end
+end
+
+
+No_DRM_NODE=0;
+ 	for m=1:No_DRM_node
+ 		flag=0;
+		for n=m:No_DRM_node-1
+			if(DRM_node(m,1)==DRM_node(n+1,1))
+				break 
+			end
+			flag=flag+1;
+		end
+		if(flag==No_DRM_node-m)
+			No_DRM_NODE=No_DRM_NODE+1;
+			DRM_NODE(No_DRM_NODE,1:6)=DRM_node(m,1:6);
+		end
+    end
+    DRM_element_input(:,1)=DRM_element(:,1);
+    No_boundary_node=0;
+    No_exterior_node=0;
+    for k=1:No_DRM_NODE
+    	if(DRM_NODE(k,6)==1)
+    		No_boundary_node=No_boundary_node+1;
+    		Boundary_node(No_boundary_node,1:6)=DRM_NODE(k,1:6);
+    	else
+    		No_exterior_node=No_exterior_node+1;
+    		Exterior_node(No_exterior_node,1:6)=DRM_NODE(k,1:6);
+    	end
+    end
+    Boundary_node=sortrows(Boundary_node);
+    Exterior_node=sortrows(Exterior_node);
+
+    % write_input_information;
+  
+  % file format: exterior_node 6 coloums: 1 node index 3 coordinates 1 dofs 1 boundary tag
+  save DRM_element.txt DRM_element_input -ascii;
+  save boundary_node.txt Boundary_node -ascii;
+  save exterior_node.txt Exterior_node -ascii;
+
+  disp('Down Pre-process of DRM, Exiting...');
+  exit;
+
+    
+
+				
+
+
+
+
