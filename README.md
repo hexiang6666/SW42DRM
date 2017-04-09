@@ -29,7 +29,7 @@ git clone https://github.com/hexiang6666/SW42DRM.git
 2) Compile
 
 ```bash
-cd SW42DRM
+cd SW42DRM/SRC
 make
 ```
 
