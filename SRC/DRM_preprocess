@@ -1,4 +1,3 @@
-#!/bin/bash
 export INSTALL_DIR=/home/hexiang/git/SW42DRM/SRC
 #*******************************************************************************************************#
 # File:              ShellScript.tmpl                                              

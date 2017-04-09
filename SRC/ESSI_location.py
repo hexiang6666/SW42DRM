@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+BUILD_DIR='/home/hexiang/git/SW42DRM/SRC/../build'
 import h5py
 import scipy as sp
 import time
@@ -43,7 +44,7 @@ z_rotation=input('Specify the degree of rotation along z axis: '); #the degree o
 #####################################################################################################################################
 
 # #################################################### Ending input ##############################################
-bash_preprocess_command='DRM_preprocess '+geometry_file_name;
+bash_preprocess_command=BUILD_DIR+'/DRM_preprocess '+geometry_file_name;
 os.system(bash_preprocess_command);
 boundary_node=sp.loadtxt("boundary_node.txt")
 exterior_node=sp.loadtxt("exterior_node.txt")

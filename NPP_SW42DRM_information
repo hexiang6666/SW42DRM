@@ -1,3 +1,4 @@
+material ID of DRM layer: 8;
 
 x_pos=100;
 x_neg=-100;
@@ -43,7 +44,6 @@ total_time=20;
 
 sample_time_step_interval=15;
 
-Initial_search_Radius=8;
+geometry filename= NPPModel_Without_Contact_geometry.fei
 
-scale_ratio=1.2;
-
+sw4 motion directory= /home/hexiang/M5.5_ESSI_srf.sw4output

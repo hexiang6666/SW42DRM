@@ -1,4 +1,4 @@
-file_path='/home/hexiang/Research_static/NPP2_3d_motion';
+file_path='/home/hexiang/TEMP';
 
 %###################################usr input variable #############################################
 

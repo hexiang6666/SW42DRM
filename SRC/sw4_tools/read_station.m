@@ -2,10 +2,16 @@
 % file_path='/home/hexiang/SMR_work/smr/sw4_motion/M5.5_ESSI_srf.sw4output';    % absolute path of SW4 motion file
 
 %################################################################################################################################################
-function [u,t,No_time_step]=read_station(file_path,i,j,k)  % i is station_x_ID;  j is station_y_ID;  k is station_z_ID
+% function [u,t,No_time_step]=read_station(file_path,i,j,k)  % i is station_x_ID;  j is station_y_ID;  k is station_z_ID
+function u=read_station(file_path,i,j,k)
 
+% addpath(file_path);
 
-addpath(file_path);
+file_prefix='E';
+file_postfix_x='.x';
+file_postfix_y='.y';
+file_postfix_z='.z';
+
 
 
 			x_str=num2str(i);
@@ -39,8 +45,8 @@ addpath(file_path);
 			[u_y, dt, lat, lon, b, e, npts, year, jday, hour, min, sec, msec, cmpaz, cmpinc, idep, stnam ]=readsac(filename_y);
 			[u_z, dt, lat, lon, b, e, npts, year, jday, hour, min, sec, msec, cmpaz, cmpinc, idep, stnam ]=readsac(filename_z);
 			u=[u_x,u_y,u_z];
-			t=dt;
-			No_time_step=npts;
+			% t=dt;
+			% No_time_step=npts;
 end
 
 
