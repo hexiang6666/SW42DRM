@@ -3,7 +3,7 @@ SW42DRM
 
 ### Usage
 
-SW42DRM is a programme that parse the output ([SAC](https://ds.iris.edu/files/sac-manual/manual/file_format.html) file)ground motion data from [SW4](https://computation.llnl.gov/projects/serpentine-wave-propagation/software)and spatially interpolate free field motion to DRM nodes and generate DRM input file while usig [Doamin Reduction Method](http://www.bssaonline.org/content/93/2/817.short)for Earthquake Soil Structure Interaction Analysis with [REAL ESSI](http://sokocalo.engr.ucdavis.edu/~jeremic/Real_ESSI_Simulator/)(UC Davis Earthquake-Soil-Structure-Interaction Simmulator). 
+SW42DRM is a programme that parse the output ([SAC](https://ds.iris.edu/files/sac-manual/manual/file_format.html) file) ground motion data from [SW4](https://computation.llnl.gov/projects/serpentine-wave-propagation/software) and spatially interpolate free field motion to DRM nodes and generate DRM input file while usig [Doamin Reduction Method](http://www.bssaonline.org/content/93/2/817.short) for Earthquake Soil Structure Interaction Analysis with [REAL ESSI](http://sokocalo.engr.ucdavis.edu/~jeremic/Real_ESSI_Simulator/) (UC Davis Earthquake-Soil-Structure-Interaction Simmulator). 
 
 ### Installation
 
@@ -29,7 +29,7 @@ git clone https://github.com/hexiang6666/SW42DRM.git
 2) Compile
 
 ```bash
-cd SW42DRM
+cd SW42DRM/SRC
 make
 ```
 
