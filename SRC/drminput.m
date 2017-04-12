@@ -1,4 +1,4 @@
-file_path='/home/hexiang/TEMP';
+file_path='/home/hexiang/free_field_smr';
 
 %###################################usr input variable #############################################
 
