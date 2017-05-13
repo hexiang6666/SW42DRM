@@ -6,7 +6,7 @@
 # Rev:               Version 1                                   | jeremic@ucdavis.edu                  #
 # Email:             hexwang@ucdavis.edu                         | Computational Geomechanics Group     #
 # * * * * * * * * * * * *  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  # 
-#                           Last Modified time: 2017-04-05 23:37:14                                     #              
+#                           Last Modified time: 2017-05-13 16:04:00                                     #              
 #  * * * * * * * * * * * *  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * #         
 # The copyright to the computer program(s) herein is the property of Hexiang Wang and Boris Jeremic     #
 # The program(s) may be used and/or copied only with written permission of Hexiang Wang or in accordance# 
@@ -18,8 +18,10 @@
 FILE_DIR=$PWD
 
 sed -n '/[ ]*add[ ]*node/p' $1  >node.include
-sed 's/[a-zA-Z#(),;*]/ /g' node.include >node.4
-mv node.4 node.include
+sed 's/[adnotmwithfs(),;*]/ /g' node.include >node.4
+sed 's/e.#/ /g' node.4 >node.5
+mv node.5 node.include
+rm node.4
 
 rm -f element.include
 sed -n '/[ ]*add[ ]*element[ #A_Za-z0-9]*NodeBrick/p'  $1  >element.include
