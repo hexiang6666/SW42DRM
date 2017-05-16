@@ -351,35 +351,37 @@ sampled_acceleration=sp.zeros((1,sampled_No_time_step));
 sampled_displacement=sp.zeros((1,sampled_No_time_step));
 # sampled_displacement.shape[1]=sampled_No_time_step;
 
-
-
-for i9 in xrange(0,No_new_node):
-# for i9 in xrange(0,1):
-	sampled_displacement_component,sampled_acceleration_component=getField(new_node[i9,1],new_node[i9,2],new_node[i9,3],new_node[i9,0],sample_time_step_interval);
-	# print new_node[i9,1],new_node[i9,2],new_node[i9,3]
-	sampled_acceleration=sp.concatenate((sampled_acceleration,sampled_acceleration_component))
-	sampled_displacement=sp.concatenate((sampled_displacement,sampled_displacement_component))
-	# sampled_acceleration.append(sampled_acceleration_component)
-	# sampled_displacement.append(sampled_displacement_component)
-
-sampled_acceleration=sp.array(sampled_acceleration)
-
-sampled_displacement=sp.array(sampled_displacement)
-
-# print "final output", sampled_displacement, sampled_acceleration;
-
-############################################write output hdf5 file###################################
-h5file=h5py.File(DRM_hdf5_filename,"w")
+h5file=h5py.File(DRM_hdf5_filename,"a")
 h5file.create_dataset("Elements", data=element)
 h5file.create_dataset("DRM Nodes", data=all_nodes)
 h5file.create_dataset("Is Boundary Node", data=is_boundary_node)
 h5file.create_dataset("Number of Exterior Nodes", data=Ne)
 h5file.create_dataset("Number of Boundary Nodes", data=Nb)
 h5file.create_dataset("Time", data=Time)
-h5file.create_dataset("Accelerations", data=sampled_acceleration[1:,:])
-h5file.create_dataset("Displacements", data=sampled_displacement[1:,:])
 
+DRMInput_Accelerations = h5file.create_dataset("Accelerations", (3*No_new_node,sampled_No_time_step), 'f')
+DRMInput_Displacements = h5file.create_dataset("Displacements", (3*No_new_node,sampled_No_time_step), 'f')
 h5file.close()
+
+
+
+for i9 in xrange(0,No_new_node):
+	# No_new_node
+# for i9 in xrange(0,1):
+	h5file    = h5py.File(DRM_hdf5_filename, 'a')   # 'r' means that hdf5 file is open in read-only mode
+	DRMInput_Accelerations = h5file["Accelerations"];
+	DRMInput_Displacements = h5file["Displacements"];
+	sampled_displacement_component,sampled_acceleration_component=getField(new_node[i9,1],new_node[i9,2],new_node[i9,3],new_node[i9,0],sample_time_step_interval);
+	DRMInput_Accelerations[i9*3:i9*3+3,:]=sampled_acceleration_component;
+	DRMInput_Displacements[i9*3:i9*3+3,:]=sampled_displacement_component;
+	h5file.close()
+
+	print "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n"
+	print "DRMInputGenerator::[", i9+1, " of ",  No_new_node,"] completed \n"; 	
+	print "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n"
+		
+
+
 ##################################################################################################
 
 

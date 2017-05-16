@@ -1,4 +1,4 @@
-file_path='/home/hexiang/free_field_smr';
+file_path='/home/hexiang/SMR_Model2';
 
 %###################################usr input variable #############################################
 
