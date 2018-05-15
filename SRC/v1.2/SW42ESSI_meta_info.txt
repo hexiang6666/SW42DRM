@@ -1,0 +1,23 @@
+####### This file contains meta infomation about SW42ESSI conversion ####
+
+DRM input:: DRMinput.hdf5
+
+SW4 motion directory:: /media/hexiang/MyBook/cml08_workstation_Jan_18/home/hexiang/SMR_work/smr/sw4_motion/Motion_SW4/
+
+origin coordinates of ESSI box (x, y, z)::  (3850,5850,0)  
+
+dimensions of ESSI Box (length, width, height):: (300, 300, 200) 
+
+spacing of ESSI nodes:: 5
+
+interval of time steps for sampling:: 3
+
+reference point in ESSI model for translational transformation (x, y, z):: (0,0,0)
+
+reference point in SW4 model for translational transformation (x, y, z):: (4000, 6000, 0)
+
+conduct rotational transformation (yes/no):: no
+
+# reference point in SW4 model for rotational transformation (x, y, z):: (4000, 6000, 0)
+
+# degrees of rotation along three axes (x, y, z):: (0,0,0)

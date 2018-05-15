@@ -37,6 +37,10 @@ make
 
 1) Run an example to check the correctness of installation
 
+```bash
+python SW42ESSI.py SW42ESSI_meta_info.txt
+```
+
 ---
 [UCD CompGeoMech](http://sokocalo.engr.ucdavis.edu/~jeremic/)
 
